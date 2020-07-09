@@ -160,6 +160,64 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jadeblank.github.io/2020/07/09/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%883%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jade_Blank">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/09/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%883%EF%BC%89/" class="post-title-link" itemprop="url">爬虫基础（3）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-07-09 10:30:47 / Modified: 17:30:37" itemprop="dateCreated datePublished" datetime="2020-07-09T10:30:47+08:00">2020-07-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://jadeblank.github.io/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%882%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -352,6 +410,86 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jadeblank.github.io/2020/07/06/base64/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jade_Blank">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/06/base64/" class="post-title-link" itemprop="url">base64算法及其特征</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-06 00:00:00" itemprop="dateCreated datePublished" datetime="2020-07-06T00:00:00+08:00">2020-07-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-09 17:30:25" itemprop="dateModified" datetime="2020-07-09T17:30:25+08:00">2020-07-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Base64编码原理："><a href="#Base64编码原理：" class="headerlink" title="Base64编码原理："></a>Base64编码原理：</h2><p>它是用64个可打印字符表示二进制所有数据方法。由于2的6次方等于64，所以可以用每6个位元为一个单元，对应某个可打印字符。</p>
+<p>我们知道三个字节有24个位元，就可以刚好对应于4个Base64单元，即3<strong>个字节需要用4个Base64的可打印字符</strong>来表示。</p>
+<p>在Base64中的可打印字符包括字母A-Z、a-z、数字0-9 ，这样共有62个字符，此外两个可打印符号在不同的系统中一般有所不同。但是，我们经常所说的Base64另外2个字符是：“+/”。</p>
+<p>这64个字符，所对应表如下。 </p>
+<p><img src="/2020/07/06/base64/duiyingbiao.png" alt="对应表"> </p>
+<p>转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。</p>
+<p>然后，每次取出6个bit，按照其值选择ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的字符作为编码后的输出。</p>
+<p>不断进行，直到全部输入数据转换完成。所以加密后的数据量是原来的4/3</p>
+<p>这里有一个问题，就是每次转换的字节数不一定就是24的整数倍，会出现有多余不足六位的情况，在base64中处理的方法是加零凑够六位，但是这样一来在解码的时候就会出现多余的位  </p>
+<p>这该怎么办呢？ 不用担心，base64想到了一个很好的解决办法。这个办法就是在 base64凑零的同时，还要满足凑出来的位数是8的倍数，不然就加一个或者两个特殊的六位  =  符号。</p>
+<p>为什么是一个或者两个=符号呢？ 因为多个8位转为6位 只会出现 剩余 2位，4位的情况，剩余2位 只需要一个 表示六位的 = 便可变为8的整数；而剩余4位 需要两个表示6位的 = 便可以变成16 是8的整数。然后在解密的时候不解析 =即可。</p>
+<p>之所以位的总数需要凑成8的倍数，是因为base64主要用于加密后的数据传送，而在传送机制中都认为传送的最小单位是按照字节算的，所以不能出现不是位总数不是8的倍数的情况，在接收到数据后，按顺序将6位的base64直接按照顺序解密成字节就完成解密了。</p>
+<p>这是恰好三个字节转为base64</p>
+<p><img src="/2020/07/06/base64/tushi1.png" alt="图示1"></p>
+<p>这是字节的位总数不是6的倍数的情况，当剩下4位时，我们需要补2个 =  凑齐8的倍数；当剩下的是2位时，我们需要补齐1个 = 凑齐8的倍数。</p>
+<p><img src="/2020/07/06/base64/tushi2.png" alt="图示2"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
 
@@ -418,7 +556,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

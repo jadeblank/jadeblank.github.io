@@ -158,7 +158,13 @@
 <h2 id="2-1-3正则表达式"><a href="#2-1-3正则表达式" class="headerlink" title="2.1.3正则表达式"></a>2.1.3正则表达式</h2><p>正则表达式（regex）之所以是这个名字，是因为他可以识别<strong>正则字符串</strong>，即如果给与的字符串符合规则就返回它，不然就忽略它。这在要求快速浏览大文档，以查找电话号码和邮箱之类的字符串时是非常方便的。</p>
 <p>下图列举了正则表达式的一些常用符号：</p>
 <p><img src="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%882%EF%BC%89/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.jpg" alt="正则表达式"></p>
-<h2 id="2-1-4正则表达式和BeautifulSoup"><a href="#2-1-4正则表达式和BeautifulSoup" class="headerlink" title="2.1.4正则表达式和BeautifulSoup"></a>2.1.4正则表达式和BeautifulSoup</h2>
+<h2 id="2-1-4正则表达式和BeautifulSoup"><a href="#2-1-4正则表达式和BeautifulSoup" class="headerlink" title="2.1.4正则表达式和BeautifulSoup"></a>2.1.4正则表达式和BeautifulSoup</h2><p>在抓取网页的时候，BeautifulSoup和正则表达式总是配合使用的。</p>
+<p>例如我们想通过定位标签来查找信息时</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">html=urlopen(<span class="string">"http://www.pythonscraping.com/pages/page3.html"</span>)</span><br><span class="line">bsObj=BeautifulSoup(html)</span><br><span class="line">images=bsObj.findAll(<span class="string">"img"</span>,&#123;<span class="string">"src"</span>:re.compile(<span class="string">"\.\.\/img\/gifts\/img.*\.jpg"</span>)&#125;)</span><br><span class="line"><span class="keyword">for</span> image <span class="keyword">in</span> images:</span><br><span class="line">	print(image)</span><br></pre></td></tr></table></figure>
+
+<p>以上代码会打印出图片的相对路径，都是以 <strong>../img/gifts/img</strong> 开头，以 <strong>.jpg</strong> 结尾</p>
+<p>正则表达式可以作为 BeautifulSoup 语句的任意一个参数，让目标元素查找工作极具灵活性</p>
+
       
     </div>
     <footer class="article-footer">

@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"jadeblank.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="1.1BeautifulSoupBeautifulSoup库通过定位HTML标签来格式化和组织复杂的网络信息，用简单的Python对象展现XML的结构信息。 1.1.1运行BeautifulSoupBeautifulSoup库最常用的对象就是BeautifulSoup对象。 12345from urllib.request import urlopenfrom bs4 import Beautif">
+  <meta name="description" content="1.1BeautifulSoupBeautifulSoup库通过定位HTML标签来格式化和组织复杂的网络信息，用简单的Python对象展现XML的结构信息。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="爬虫基础（1）">
 <meta property="og:url" content="http://jadeblank.github.io/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%881%EF%BC%89/index.html">
 <meta property="og:site_name" content="Jade_Blank">
-<meta property="og:description" content="1.1BeautifulSoupBeautifulSoup库通过定位HTML标签来格式化和组织复杂的网络信息，用简单的Python对象展现XML的结构信息。 1.1.1运行BeautifulSoupBeautifulSoup库最常用的对象就是BeautifulSoup对象。 12345from urllib.request import urlopenfrom bs4 import Beautif">
+<meta property="og:description" content="1.1BeautifulSoupBeautifulSoup库通过定位HTML标签来格式化和组织复杂的网络信息，用简单的Python对象展现XML的结构信息。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-08T02:42:52.000Z">
-<meta property="article:modified_time" content="2020-07-08T05:08:38.820Z">
+<meta property="article:modified_time" content="2020-07-09T09:36:12.821Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -187,10 +187,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-07-08 10:42:52 / Modified: 13:08:38" itemprop="dateCreated datePublished" datetime="2020-07-08T10:42:52+08:00">2020-07-08</time>
+              <time title="Created: 2020-07-08 10:42:52" itemprop="dateCreated datePublished" datetime="2020-07-08T10:42:52+08:00">2020-07-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-09 17:36:12" itemprop="dateModified" datetime="2020-07-09T17:36:12+08:00">2020-07-09</time>
+              </span>
 
           
 
@@ -204,6 +210,8 @@
 
       
         <h1 id="1-1BeautifulSoup"><a href="#1-1BeautifulSoup" class="headerlink" title="1.1BeautifulSoup"></a>1.1BeautifulSoup</h1><p>BeautifulSoup库通过定位HTML标签来格式化和组织复杂的网络信息，用简单的Python对象展现XML的结构信息。</p>
+<a id="more"></a>
+
 <h2 id="1-1-1运行BeautifulSoup"><a href="#1-1-1运行BeautifulSoup" class="headerlink" title="1.1.1运行BeautifulSoup"></a>1.1.1运行BeautifulSoup</h2><p>BeautifulSoup库最常用的对象就是BeautifulSoup对象。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line">html = urlopen(<span class="string">"http://www.pythonscraping.com/pages/page1.html"</span>)</span><br><span class="line">bsObj=BeautifulSoup(html.read())</span><br><span class="line">print(bsObj.h1)</span><br></pre></td></tr></table></figure>
 

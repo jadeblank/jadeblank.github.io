@@ -185,7 +185,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-07-09 10:30:47 / Modified: 17:30:37" itemprop="dateCreated datePublished" datetime="2020-07-09T10:30:47+08:00">2020-07-09</time>
+              <time title="Created: 2020-07-09 10:30:47 / Modified: 17:34:35" itemprop="dateCreated datePublished" datetime="2020-07-09T10:30:47+08:00">2020-07-09</time>
             </span>
 
           
@@ -199,7 +199,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="3-1开始采集"><a href="#3-1开始采集" class="headerlink" title="3.1开始采集"></a>3.1开始采集</h1>
       
     </div>
 
@@ -249,7 +249,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-09 16:30:26" itemprop="dateModified" datetime="2020-07-09T16:30:26+08:00">2020-07-09</time>
+                <time title="Modified: 2020-07-09 17:36:21" itemprop="dateModified" datetime="2020-07-09T17:36:21+08:00">2020-07-09</time>
               </span>
 
           
@@ -264,48 +264,14 @@
 
       
           <h1 id="2-1复杂HTML解析"><a href="#2-1复杂HTML解析" class="headerlink" title="2.1复杂HTML解析"></a>2.1复杂HTML解析</h1><p>对于一个结构较为复杂的HTML页面，我们可以通过属性查找标签的方法，标签组的使用，以及标签解析树的方式去获取信息。</p>
-<h2 id="2-1-1BeautifulSoup-的find-和findAll"><a href="#2-1-1BeautifulSoup-的find-和findAll" class="headerlink" title="2.1.1BeautifulSoup 的find()和findAll()"></a>2.1.1BeautifulSoup 的find()和findAll()</h2><p>借助find()和findAll()函数，可以通过标签的不同属性轻松的过滤HTML页面，查找需要的标签组或单个标签。两者在BeautifulSoup 文档里的定义为：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">findAll(tag,attributes,recursive,text,limit,keywords)</span><br><span class="line">findAll(tag,attributes,recursive,text,keywords)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><h4 id="标签参数tag"><a href="#标签参数tag" class="headerlink" title="标签参数tag"></a>标签参数tag</h4></li>
-</ul>
-<p>该参数可以接受一个标签名称或者多个标签名称组成Python列表做标签参数。例如，下面的代码将返回一个包含HTML文档中所有标题标签的列表：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.findAll(&#123;&quot;h1&quot;,&quot;h2&quot;,&quot;h3&quot;,&quot;h4&quot;,&quot;h5&quot;,&quot;h6&quot;&#125;)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><h4 id="属性参数attributes"><a href="#属性参数attributes" class="headerlink" title="属性参数attributes"></a>属性参数attributes</h4></li>
-</ul>
-<p>该参数是用一个Python字典封装一个标签的若干属性和对应的属性值。例如，下面这个函数会返回HTML文档里红色与绿色两种颜色的span标签：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.findALL(&quot;span&quot;,&#123;&quot;class&quot;:&#123;&quot;green&quot;,&quot;red&quot;&#125;&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-1-2导航树"><a href="#2-1-2导航树" class="headerlink" title="2.1.2导航树"></a>2.1.2导航树</h2><p>findAll() 函数通过标签的名称和属性来查找标签，但是如果需要通过标签在文档中的位置来查找标签，就可以使用导航树。</p>
-<ul>
-<li><h4 id="处理子标签和其他后代标签"><a href="#处理子标签和其他后代标签" class="headerlink" title="处理子标签和其他后代标签"></a>处理子标签和其他后代标签</h4></li>
-</ul>
-<p>在BeautifulSoup库中，孩子（children）和后代（descendant）是不同的，子标签就是父标签的下一级别，而后代标签是指一个父标签下面所有级别的标签。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line">html=urlopen(<span class="string">"http://www.pythonscraping.com/pages/page3.html"</span>)</span><br><span class="line">bsObj=BeautifulSoup(html)</span><br><span class="line"><span class="keyword">for</span> child <span class="keyword">in</span> bsObj.find(<span class="string">"table"</span>,&#123;<span class="string">"id"</span>:<span class="string">"giftList"</span>&#125;).children:</span><br><span class="line">	print(child)</span><br></pre></td></tr></table></figure>
-
-<p>以上代码会打印giftList表格中所有产品的数据行。如果使用descendant() 函数,那么就会有更多的标签被打印出来。</p>
-<ul>
-<li><h4 id="处理兄弟标签"><a href="#处理兄弟标签" class="headerlink" title="处理兄弟标签"></a>处理兄弟标签</h4></li>
-</ul>
-<p>BeautifulSoup 的 next_siblings() 函数可以让收集表格数据更为简便</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line">html=urlopen(<span class="string">"http://www.pythonscraping.com/pages/page3.html"</span>)</span><br><span class="line">bsObj=BeautifulSoup(html)</span><br><span class="line"><span class="keyword">for</span> child <span class="keyword">in</span> bsObj.find(<span class="string">"table"</span>,&#123;<span class="string">"id"</span>:<span class="string">"giftList"</span>&#125;).tr.next_siblings():</span><br><span class="line">	print(child)</span><br></pre></td></tr></table></figure>
-
-<p>这段代码会打印产品列表里的所有行的产品，第一行除外。除外的原因是：1.对象不能把自己作为兄弟标签，即不会包含这个标签本身。2.这个函数只会调用后面的兄弟标签。</p>
-<h2 id="2-1-3正则表达式"><a href="#2-1-3正则表达式" class="headerlink" title="2.1.3正则表达式"></a>2.1.3正则表达式</h2><p>正则表达式（regex）之所以是这个名字，是因为他可以识别<strong>正则字符串</strong>，即如果给与的字符串符合规则就返回它，不然就忽略它。这在要求快速浏览大文档，以查找电话号码和邮箱之类的字符串时是非常方便的。</p>
-<p>下图列举了正则表达式的一些常用符号：</p>
-<p><img src="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%882%EF%BC%89/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.jpg" alt="正则表达式"></p>
-<h2 id="2-1-4正则表达式和BeautifulSoup"><a href="#2-1-4正则表达式和BeautifulSoup" class="headerlink" title="2.1.4正则表达式和BeautifulSoup"></a>2.1.4正则表达式和BeautifulSoup</h2><p>在抓取网页的时候，BeautifulSoup和正则表达式总是配合使用的。</p>
-<p>例如我们想通过定位标签来查找信息时</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">html=urlopen(<span class="string">"http://www.pythonscraping.com/pages/page3.html"</span>)</span><br><span class="line">bsObj=BeautifulSoup(html)</span><br><span class="line">images=bsObj.findAll(<span class="string">"img"</span>,&#123;<span class="string">"src"</span>:re.compile(<span class="string">"\.\.\/img\/gifts\/img.*\.jpg"</span>)&#125;)</span><br><span class="line"><span class="keyword">for</span> image <span class="keyword">in</span> images:</span><br><span class="line">	print(image)</span><br></pre></td></tr></table></figure>
-
-<p>以上代码会打印出图片的相对路径，都是以 <strong>../img/gifts/img</strong> 开头，以 <strong>.jpg</strong> 结尾</p>
-<p>正则表达式可以作为 BeautifulSoup 语句的任意一个参数，让目标元素查找工作极具灵活性</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%882%EF%BC%89/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -347,10 +313,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-07-08 10:42:52 / Modified: 13:08:38" itemprop="dateCreated datePublished" datetime="2020-07-08T10:42:52+08:00">2020-07-08</time>
+              <time title="Created: 2020-07-08 10:42:52" itemprop="dateCreated datePublished" datetime="2020-07-08T10:42:52+08:00">2020-07-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-09 17:36:12" itemprop="dateModified" datetime="2020-07-09T17:36:12+08:00">2020-07-09</time>
+              </span>
 
           
 
@@ -364,38 +336,14 @@
 
       
           <h1 id="1-1BeautifulSoup"><a href="#1-1BeautifulSoup" class="headerlink" title="1.1BeautifulSoup"></a>1.1BeautifulSoup</h1><p>BeautifulSoup库通过定位HTML标签来格式化和组织复杂的网络信息，用简单的Python对象展现XML的结构信息。</p>
-<h2 id="1-1-1运行BeautifulSoup"><a href="#1-1-1运行BeautifulSoup" class="headerlink" title="1.1.1运行BeautifulSoup"></a>1.1.1运行BeautifulSoup</h2><p>BeautifulSoup库最常用的对象就是BeautifulSoup对象。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line">html = urlopen(<span class="string">"http://www.pythonscraping.com/pages/page1.html"</span>)</span><br><span class="line">bsObj=BeautifulSoup(html.read())</span><br><span class="line">print(bsObj.h1)</span><br></pre></td></tr></table></figure>
-
-<p>第三行 <strong>urllib.request.urlopen() 函数</strong>用于实现对目标url的访问,返回一个对象。</p>
-<p><strong>urlopen返回对象提供方法</strong>：</p>
-<p>read() , readline() ,readlines() , fileno() , close() ：对HTTPResponse类型数据进行操作</p>
-<p>info()：返回HTTPMessage对象，表示远程服务器返回的头信息</p>
-<p>getcode()：返回Http状态码。如果是http请求，200请求成功完成;404网址未找到</p>
-<p>geturl()：返回请求的url</p>
-<p>第四行调用html.read()将网页的HTML内容传到<strong>BeautifulSoup对象</strong></p>
-<p>当我们从对象里提取h1标签（&lt; h1&gt;）里的内容时，可以用bsObj.h1直接调用</p>
-<h1 id="1-2网络连接异常"><a href="#1-2网络连接异常" class="headerlink" title="1.2网络连接异常"></a>1.2网络连接异常</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">html = urlopen(<span class="string">"http://www.pythonscraping.com/pages/page1.html"</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这行代码主要可能发生两种异常：</p>
-<ul>
-<li>网页在服务器上不存在（或获取页面时出现错误）</li>
-</ul>
-<p>这种异常程序会返回HTTP错误，如“404 Page Not Found”、”500 Internet Server Error”等</p>
-<p>此时urlopen函数会抛出 <strong>HTTPError 异常</strong>，通常采用以下方式处理：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>：</span><br><span class="line">	html = urlopen(<span class="string">"http://www.pythonscraping.com/pages/page1.html"</span>)</span><br><span class="line"><span class="keyword">except</span> HTTPError <span class="keyword">as</span> e:</span><br><span class="line">    print(e)</span><br><span class="line">    <span class="keyword">return</span> none <span class="comment">#返回空值、中断程序或者执行另一个方案</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>服务器不存在</li>
-</ul>
-<p>如果服务器不存在（或者链接打不开，或者URL地址写错了），url会返回一个<strong>None对象</strong></p>
-<p>我们可以添加一个语句判断html是不是None:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> html <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    print(<span class="string">"URL is not found"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment">#继续程序</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>如果想要调用的标签不存在，BeautifulSoup就会返回一个None对象，但如果继续调用None对象下的子标签，就会发生<strong>AttributeError错误</strong></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%881%EF%BC%89/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -445,7 +393,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-09 17:30:25" itemprop="dateModified" datetime="2020-07-09T17:30:25+08:00">2020-07-09</time>
+                <time title="Modified: 2020-07-09 17:34:02" itemprop="dateModified" datetime="2020-07-09T17:34:02+08:00">2020-07-09</time>
               </span>
 
           

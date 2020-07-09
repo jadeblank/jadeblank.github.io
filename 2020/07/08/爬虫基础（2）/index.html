@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>爬虫基础（2） | Jade_Blank</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="2.1复杂HTML解析对于一个结构较为复杂的HTML页面，我们可以通过属性查找标签的方法，标签组的使用，以及标签解析树的方式去获取信息。 2.1.1BeautifulSoup 的find()和findAll()借助find()和findAll()函数，可以通过标签的不同属性轻松的过滤HTML页面，查找需要的标签组或单个标签。两者在BeautifulSoup 文档里的定义为： 12findAll(t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫基础（2）">
+<meta property="og:url" content="http://jadeblank.github.io/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%882%EF%BC%89/index.html">
+<meta property="og:site_name" content="Jade_Blank">
+<meta property="og:description" content="2.1复杂HTML解析对于一个结构较为复杂的HTML页面，我们可以通过属性查找标签的方法，标签组的使用，以及标签解析树的方式去获取信息。 2.1.1BeautifulSoup 的find()和findAll()借助find()和findAll()函数，可以通过标签的不同属性轻松的过滤HTML页面，查找需要的标签组或单个标签。两者在BeautifulSoup 文档里的定义为： 12findAll(t">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%882%EF%BC%89/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.jpg">
+<meta property="article:published_time" content="2020-07-08T08:55:03.000Z">
+<meta property="article:modified_time" content="2020-07-09T07:17:56.690Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jadeblank.github.io/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%882%EF%BC%89/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Jade_Blank" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Jade_Blank</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jadeblank.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-爬虫基础（2）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%882%EF%BC%89/" class="article-date">
+  <time datetime="2020-07-08T08:55:03.000Z" itemprop="datePublished">2020-07-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      爬虫基础（2）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2-1复杂HTML解析"><a href="#2-1复杂HTML解析" class="headerlink" title="2.1复杂HTML解析"></a>2.1复杂HTML解析</h1><p>对于一个结构较为复杂的HTML页面，我们可以通过属性查找标签的方法，标签组的使用，以及标签解析树的方式去获取信息。</p>
+<h2 id="2-1-1BeautifulSoup-的find-和findAll"><a href="#2-1-1BeautifulSoup-的find-和findAll" class="headerlink" title="2.1.1BeautifulSoup 的find()和findAll()"></a>2.1.1BeautifulSoup 的find()和findAll()</h2><p>借助find()和findAll()函数，可以通过标签的不同属性轻松的过滤HTML页面，查找需要的标签组或单个标签。两者在BeautifulSoup 文档里的定义为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">findAll(tag,attributes,recursive,text,limit,keywords)</span><br><span class="line">findAll(tag,attributes,recursive,text,keywords)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h4 id="标签参数tag"><a href="#标签参数tag" class="headerlink" title="标签参数tag"></a>标签参数tag</h4></li>
+</ul>
+<p>该参数可以接受一个标签名称或者多个标签名称组成Python列表做标签参数。例如，下面的代码将返回一个包含HTML文档中所有标题标签的列表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.findAll(&#123;&quot;h1&quot;,&quot;h2&quot;,&quot;h3&quot;,&quot;h4&quot;,&quot;h5&quot;,&quot;h6&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h4 id="属性参数attributes"><a href="#属性参数attributes" class="headerlink" title="属性参数attributes"></a>属性参数attributes</h4></li>
+</ul>
+<p>该参数是用一个Python字典封装一个标签的若干属性和对应的属性值。例如，下面这个函数会返回HTML文档里红色与绿色两种颜色的span标签：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.findALL(&quot;span&quot;,&#123;&quot;class&quot;:&#123;&quot;green&quot;,&quot;red&quot;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-1-2导航树"><a href="#2-1-2导航树" class="headerlink" title="2.1.2导航树"></a>2.1.2导航树</h2><p>findAll() 函数通过标签的名称和属性来查找标签，但是如果需要通过标签在文档中的位置来查找标签，就可以使用导航树。</p>
+<ul>
+<li><h4 id="处理子标签和其他后代标签"><a href="#处理子标签和其他后代标签" class="headerlink" title="处理子标签和其他后代标签"></a>处理子标签和其他后代标签</h4></li>
+</ul>
+<p>在BeautifulSoup库中，孩子（children）和后代（descendant）是不同的，子标签就是父标签的下一级别，而后代标签是指一个父标签下面所有级别的标签。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line">html=urlopen(<span class="string">"http://www.pythonscraping.com/pages/page3.html"</span>)</span><br><span class="line">bsObj=BeautifulSoup(html)</span><br><span class="line"><span class="keyword">for</span> child <span class="keyword">in</span> bsObj.find(<span class="string">"table"</span>,&#123;<span class="string">"id"</span>:<span class="string">"giftList"</span>&#125;).children:</span><br><span class="line">	print(child)</span><br></pre></td></tr></table></figure>
+
+<p>以上代码会打印giftList表格中所有产品的数据行。如果使用descendant() 函数,那么就会有更多的标签被打印出来。</p>
+<ul>
+<li><h4 id="处理兄弟标签"><a href="#处理兄弟标签" class="headerlink" title="处理兄弟标签"></a>处理兄弟标签</h4></li>
+</ul>
+<p>BeautifulSoup 的 next_siblings() 函数可以让收集表格数据更为简便</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line">html=urlopen(<span class="string">"http://www.pythonscraping.com/pages/page3.html"</span>)</span><br><span class="line">bsObj=BeautifulSoup(html)</span><br><span class="line"><span class="keyword">for</span> child <span class="keyword">in</span> bsObj.find(<span class="string">"table"</span>,&#123;<span class="string">"id"</span>:<span class="string">"giftList"</span>&#125;).tr.next_siblings():</span><br><span class="line">	print(child)</span><br></pre></td></tr></table></figure>
+
+<p>这段代码会打印产品列表里的所有行的产品，第一行除外。除外的原因是：1.对象不能把自己作为兄弟标签，即不会包含这个标签本身。2.这个函数只会调用后面的兄弟标签。</p>
+<h2 id="2-1-3正则表达式"><a href="#2-1-3正则表达式" class="headerlink" title="2.1.3正则表达式"></a>2.1.3正则表达式</h2><p>正则表达式（regex）之所以是这个名字，是因为他可以识别<strong>正则字符串</strong>，即如果给与的字符串符合规则就返回它，不然就忽略它。这在要求快速浏览大文档，以查找电话号码和邮箱之类的字符串时是非常方便的。</p>
+<p>下图列举了正则表达式的一些常用符号：</p>
+<p><img src="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%882%EF%BC%89/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.jpg" alt="正则表达式"></p>
+<h2 id="2-1-4正则表达式和BeautifulSoup"><a href="#2-1-4正则表达式和BeautifulSoup" class="headerlink" title="2.1.4正则表达式和BeautifulSoup"></a>2.1.4正则表达式和BeautifulSoup</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jadeblank.github.io/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%882%EF%BC%89/" data-id="ckcdkk9w100005orb1c725zup" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/07/09/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%883%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          爬虫基础（3）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%881%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">爬虫基础（1）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/07/09/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%883%EF%BC%89/">爬虫基础（3）</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%882%EF%BC%89/">爬虫基础（2）</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%881%EF%BC%89/">爬虫基础（1）</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/06/base64/">base64算法及其特征</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

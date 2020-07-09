@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>base64算法及其特征 | Jade_Blank</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Base64编码原理：它是用64个可打印字符表示二进制所有数据方法。由于2的6次方等于64，所以可以用每6个位元为一个单元，对应某个可打印字符。 我们知道三个字节有24个位元，就可以刚好对应于4个Base64单元，即3个字节需要用4个Base64的可打印字符来表示。 在Base64中的可打印字符包括字母A-Z、a-z、数字0-9 ，这样共有62个字符，此外两个可打印符号在不同的系统中一般有所不同。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="base64算法及其特征">
+<meta property="og:url" content="http://jadeblank.github.io/2020/07/06/base64/index.html">
+<meta property="og:site_name" content="Jade_Blank">
+<meta property="og:description" content="Base64编码原理：它是用64个可打印字符表示二进制所有数据方法。由于2的6次方等于64，所以可以用每6个位元为一个单元，对应某个可打印字符。 我们知道三个字节有24个位元，就可以刚好对应于4个Base64单元，即3个字节需要用4个Base64的可打印字符来表示。 在Base64中的可打印字符包括字母A-Z、a-z、数字0-9 ，这样共有62个字符，此外两个可打印符号在不同的系统中一般有所不同。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/06/base64/duiyingbiao.png">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/06/base64/tushi1.png">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/06/base64/tushi2.png">
+<meta property="article:published_time" content="2020-07-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-07-07T00:54:49.139Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jadeblank.github.io/2020/07/06/base64/duiyingbiao.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Jade_Blank" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Jade_Blank</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jadeblank.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-base64" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/06/base64/" class="article-date">
+  <time datetime="2020-07-05T16:00:00.000Z" itemprop="datePublished">2020-07-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      base64算法及其特征
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Base64编码原理："><a href="#Base64编码原理：" class="headerlink" title="Base64编码原理："></a>Base64编码原理：</h2><p>它是用64个可打印字符表示二进制所有数据方法。由于2的6次方等于64，所以可以用每6个位元为一个单元，对应某个可打印字符。</p>
+<p>我们知道三个字节有24个位元，就可以刚好对应于4个Base64单元，即3<strong>个字节需要用4个Base64的可打印字符</strong>来表示。</p>
+<p>在Base64中的可打印字符包括字母A-Z、a-z、数字0-9 ，这样共有62个字符，此外两个可打印符号在不同的系统中一般有所不同。但是，我们经常所说的Base64另外2个字符是：“+/”。</p>
+<p>这64个字符，所对应表如下。 </p>
+<p><img src="/2020/07/06/base64/duiyingbiao.png" alt="对应表"> </p>
+<p>转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。</p>
+<p>然后，每次取出6个bit，按照其值选择ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的字符作为编码后的输出。</p>
+<p>不断进行，直到全部输入数据转换完成。所以加密后的数据量是原来的4/3</p>
+<p>这里有一个问题，就是每次转换的字节数不一定就是24的整数倍，会出现有多余不足六位的情况，在base64中处理的方法是加零凑够六位，但是这样一来在解码的时候就会出现多余的位  </p>
+<p>这该怎么办呢？ 不用担心，base64想到了一个很好的解决办法。这个办法就是在 base64凑零的同时，还要满足凑出来的位数是8的倍数，不然就加一个或者两个特殊的六位  =  符号。</p>
+<p>为什么是一个或者两个=符号呢？ 因为多个8位转为6位 只会出现 剩余 2位，4位的情况，剩余2位 只需要一个 表示六位的 = 便可变为8的整数；而剩余4位 需要两个表示6位的 = 便可以变成16 是8的整数。然后在解密的时候不解析 =即可。</p>
+<p>之所以位的总数需要凑成8的倍数，是因为base64主要用于加密后的数据传送，而在传送机制中都认为传送的最小单位是按照字节算的，所以不能出现不是位总数不是8的倍数的情况，在接收到数据后，按顺序将6位的base64直接按照顺序解密成字节就完成解密了。</p>
+<p>这是恰好三个字节转为base64</p>
+<p><img src="/2020/07/06/base64/tushi1.png" alt="图示1"></p>
+<p>这是字节的位总数不是6的倍数的情况，当剩下4位时，我们需要补2个 =  凑齐8的倍数；当剩下的是2位时，我们需要补齐1个 = 凑齐8的倍数。</p>
+<p><img src="/2020/07/06/base64/tushi2.png" alt="图示2"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jadeblank.github.io/2020/07/06/base64/" data-id="ckcaln1f20000lgrbajq2dhrn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%881%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          爬虫基础（1）
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/07/09/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%883%EF%BC%89/">爬虫基础（3）</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%882%EF%BC%89/">爬虫基础（2）</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%881%EF%BC%89/">爬虫基础（1）</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/06/base64/">base64算法及其特征</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

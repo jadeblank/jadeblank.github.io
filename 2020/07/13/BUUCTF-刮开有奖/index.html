@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jadeblank.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="BUUCTF–刮开有奖1) 准备 获得信息 1.32位文件 2.Not packed 无壳">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUUCTF--刮开有奖">
+<meta property="og:url" content="http://jadeblank.github.io/2020/07/13/BUUCTF-%E5%88%AE%E5%BC%80%E6%9C%89%E5%A5%96/index.html">
+<meta property="og:site_name" content="Jade_Blank">
+<meta property="og:description" content="BUUCTF–刮开有奖1) 准备 获得信息 1.32位文件 2.Not packed 无壳">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/13/BUUCTF-%E5%88%AE%E5%BC%80%E6%9C%89%E5%A5%96/exeinfoPe.jpg">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/13/BUUCTF-%E5%88%AE%E5%BC%80%E6%9C%89%E5%A5%96/winmain.png">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/13/BUUCTF-%E5%88%AE%E5%BC%80%E6%9C%89%E5%A5%96/base64.png">
+<meta property="article:published_time" content="2020-07-13T14:00:12.000Z">
+<meta property="article:modified_time" content="2020-07-13T15:12:17.281Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Re">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jadeblank.github.io/2020/07/13/BUUCTF-%E5%88%AE%E5%BC%80%E6%9C%89%E5%A5%96/exeinfoPe.jpg">
+
+<link rel="canonical" href="http://jadeblank.github.io/2020/07/13/BUUCTF-%E5%88%AE%E5%BC%80%E6%9C%89%E5%A5%96/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>BUUCTF--刮开有奖 | Jade_Blank</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jade_Blank</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jadeblank.github.io/2020/07/13/BUUCTF-%E5%88%AE%E5%BC%80%E6%9C%89%E5%A5%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jade_Blank">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          BUUCTF--刮开有奖
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-07-13 22:00:12 / Modified: 23:12:17" itemprop="dateCreated datePublished" datetime="2020-07-13T22:00:12+08:00">2020-07-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="BUUCTF–刮开有奖"><a href="#BUUCTF–刮开有奖" class="headerlink" title="BUUCTF–刮开有奖"></a>BUUCTF–刮开有奖</h1><h2 id="1-准备"><a href="#1-准备" class="headerlink" title="1) 准备"></a>1) 准备</h2><p><img src="/2020/07/13/BUUCTF-%E5%88%AE%E5%BC%80%E6%9C%89%E5%A5%96/exeinfoPe.jpg" alt="PE"></p>
+<p>获得信息</p>
+<p>1.32位文件</p>
+<p>2.Not packed 无壳</p>
+<a id="more"></a>
+
+<h2 id="2）IDA打开"><a href="#2）IDA打开" class="headerlink" title="2）IDA打开"></a>2）IDA打开</h2><p>进入主函数WinMain</p>
+<p><img src="/2020/07/13/BUUCTF-%E5%88%AE%E5%BC%80%E6%9C%89%E5%A5%96/winmain.png" alt="PE"></p>
+<p>找到关键的函数DialogFunc，并反编译为C代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span> BOOL __userpurge DialogFunc@&lt;eax&gt;(<span class="keyword">int</span> a1@&lt;edi&gt;, <span class="keyword">int</span> a2@&lt;esi&gt;, HWND hDlg, UINT a4, WPARAM a5, LPARAM a6)</span><br><span class="line"> <span class="number">2</span> &#123;</span><br><span class="line"> <span class="number">3</span>   <span class="keyword">const</span> <span class="keyword">char</span> *v6; <span class="comment">// esi</span></span><br><span class="line"> <span class="number">4</span>   <span class="keyword">const</span> <span class="keyword">char</span> *v7; <span class="comment">// edi</span></span><br><span class="line"> <span class="number">5</span>   <span class="keyword">int</span> v9; <span class="comment">// [esp+4h] [ebp-20030h]</span></span><br><span class="line"> <span class="number">6</span>   <span class="keyword">int</span> v10; <span class="comment">// [esp+8h] [ebp-2002Ch]</span></span><br><span class="line"> <span class="number">7</span>   <span class="keyword">int</span> v11; <span class="comment">// [esp+Ch] [ebp-20028h]</span></span><br><span class="line"> <span class="number">8</span>   <span class="keyword">int</span> v12; <span class="comment">// [esp+10h] [ebp-20024h]</span></span><br><span class="line"> <span class="number">9</span>   <span class="keyword">int</span> v13; <span class="comment">// [esp+14h] [ebp-20020h]</span></span><br><span class="line"><span class="number">10</span>   <span class="keyword">int</span> v14; <span class="comment">// [esp+18h] [ebp-2001Ch]</span></span><br><span class="line"><span class="number">11</span>   <span class="keyword">int</span> v15; <span class="comment">// [esp+1Ch] [ebp-20018h]</span></span><br><span class="line"><span class="number">12</span>   <span class="keyword">int</span> v16; <span class="comment">// [esp+20h] [ebp-20014h]</span></span><br><span class="line"><span class="number">13</span>   <span class="keyword">int</span> v17; <span class="comment">// [esp+24h] [ebp-20010h]</span></span><br><span class="line"><span class="number">14</span>   <span class="keyword">int</span> v18; <span class="comment">// [esp+28h] [ebp-2000Ch]</span></span><br><span class="line"><span class="number">15</span>   <span class="keyword">int</span> v19; <span class="comment">// [esp+2Ch] [ebp-20008h]</span></span><br><span class="line"><span class="number">16</span>   CHAR <span class="keyword">String</span>; <span class="comment">// [esp+30h] [ebp-20004h]</span></span><br><span class="line"><span class="number">17</span>   <span class="keyword">char</span> v21; <span class="comment">// [esp+31h] [ebp-20003h]</span></span><br><span class="line"><span class="number">18</span>   <span class="keyword">char</span> v22; <span class="comment">// [esp+32h] [ebp-20002h]</span></span><br><span class="line"><span class="number">19</span>   <span class="keyword">char</span> v23; <span class="comment">// [esp+33h] [ebp-20001h]</span></span><br><span class="line"><span class="number">20</span>   <span class="keyword">char</span> v24; <span class="comment">// [esp+34h] [ebp-20000h]</span></span><br><span class="line"><span class="number">21</span>   <span class="keyword">char</span> v25; <span class="comment">// [esp+10030h] [ebp-10004h]</span></span><br><span class="line"><span class="number">22</span>   <span class="keyword">char</span> v26; <span class="comment">// [esp+10031h] [ebp-10003h]</span></span><br><span class="line"><span class="number">23</span>   <span class="keyword">char</span> v27; <span class="comment">// [esp+10032h] [ebp-10002h]</span></span><br><span class="line"><span class="number">24</span>   <span class="keyword">int</span> v28; <span class="comment">// [esp+20028h] [ebp-Ch]</span></span><br><span class="line"><span class="number">25</span>   <span class="keyword">int</span> v29; <span class="comment">// [esp+2002Ch] [ebp-8h]</span></span><br><span class="line"><span class="number">26</span> </span><br><span class="line"><span class="number">27</span>   __alloca_probe();</span><br><span class="line"><span class="number">28</span>   <span class="keyword">if</span> ( a4 == <span class="number">272</span> )</span><br><span class="line"><span class="number">29</span>     <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"><span class="number">30</span>   v29 = a2;</span><br><span class="line"><span class="number">31</span>   v28 = a1;</span><br><span class="line"><span class="number">32</span>   <span class="keyword">if</span> ( a4 != <span class="number">273</span> )</span><br><span class="line"><span class="number">33</span>     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="number">34</span>   <span class="keyword">if</span> ( (_WORD)a5 == <span class="number">1001</span> )</span><br><span class="line"><span class="number">35</span>   &#123;</span><br><span class="line"><span class="number">36</span>     <span class="built_in">memset</span>(&amp;<span class="keyword">String</span>, <span class="number">0</span>, <span class="number">0xFFFF</span>u);</span><br><span class="line"><span class="number">37</span>     GetDlgItemTextA(hDlg, <span class="number">1000</span>, &amp;<span class="keyword">String</span>, <span class="number">0xFFFF</span>);</span><br><span class="line"><span class="number">38</span>     <span class="keyword">if</span> ( <span class="built_in">strlen</span>(&amp;<span class="keyword">String</span>) == <span class="number">8</span> )</span><br><span class="line"><span class="number">39</span>     &#123;</span><br><span class="line"><span class="number">40</span>       v9 = <span class="number">90</span>;</span><br><span class="line"><span class="number">41</span>       v10 = <span class="number">74</span>;</span><br><span class="line"><span class="number">42</span>       v11 = <span class="number">83</span>;</span><br><span class="line"><span class="number">43</span>       v12 = <span class="number">69</span>;</span><br><span class="line"><span class="number">44</span>       v13 = <span class="number">67</span>;</span><br><span class="line"><span class="number">45</span>       v14 = <span class="number">97</span>;</span><br><span class="line"><span class="number">46</span>       v15 = <span class="number">78</span>;</span><br><span class="line"><span class="number">47</span>       v16 = <span class="number">72</span>;</span><br><span class="line"><span class="number">48</span>       v17 = <span class="number">51</span>;</span><br><span class="line"><span class="number">49</span>       v18 = <span class="number">110</span>;</span><br><span class="line"><span class="number">50</span>       v19 = <span class="number">103</span>;</span><br><span class="line"><span class="number">51</span>       sub_4010F0(&amp;v9, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line"><span class="number">52</span>       <span class="built_in">memset</span>(&amp;v25, <span class="number">0</span>, <span class="number">0xFFFF</span>u);</span><br><span class="line"><span class="number">53</span>       v6 = (<span class="keyword">const</span> <span class="keyword">char</span> *)sub_401000(&amp;v25, <span class="built_in">strlen</span>(&amp;v25));</span><br><span class="line"><span class="number">54</span>       <span class="built_in">memset</span>(&amp;v25, <span class="number">0</span>, <span class="number">0xFFFF</span>u);</span><br><span class="line"><span class="number">55</span>       v26 = v23;</span><br><span class="line"><span class="number">56</span>       v25 = v22;</span><br><span class="line"><span class="number">57</span>       v27 = v24;</span><br><span class="line"><span class="number">58</span>       v7 = (<span class="keyword">const</span> <span class="keyword">char</span> *)sub_401000(&amp;v25, <span class="built_in">strlen</span>(&amp;v25));</span><br><span class="line"><span class="number">59</span>       <span class="keyword">if</span> ( <span class="keyword">String</span> == v9 + <span class="number">34</span></span><br><span class="line"><span class="number">60</span>         &amp;&amp; v21 == v13</span><br><span class="line"><span class="number">61</span>         &amp;&amp; <span class="number">4</span> * v22 - <span class="number">141</span> == <span class="number">3</span> * v11</span><br><span class="line"><span class="number">62</span>         &amp;&amp; v23 / <span class="number">4</span> == <span class="number">2</span> * (v16 / <span class="number">9</span>)</span><br><span class="line"><span class="number">63</span>         &amp;&amp; !<span class="built_in">strcmp</span>(v6, <span class="string">"ak1w"</span>)</span><br><span class="line"><span class="number">64</span>         &amp;&amp; !<span class="built_in">strcmp</span>(v7, <span class="string">"V1Ax"</span>) )</span><br><span class="line"><span class="number">65</span>       &#123;</span><br><span class="line"><span class="number">66</span>         MessageBoxA(hDlg, <span class="string">"U g3t 1T!"</span>, <span class="string">"@_@"</span>, <span class="number">0</span>);</span><br><span class="line"><span class="number">67</span>       &#125;</span><br><span class="line"><span class="number">68</span>     &#125;</span><br><span class="line"><span class="number">69</span>     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="number">70</span>   &#125;</span><br><span class="line"><span class="number">71</span>   <span class="keyword">if</span> ( (_WORD)a5 != <span class="number">1</span> &amp;&amp; (_WORD)a5 != <span class="number">2</span> )</span><br><span class="line"><span class="number">72</span>     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="number">73</span>   EndDialog(hDlg, (<span class="keyword">unsigned</span> __int16)a5);</span><br><span class="line"><span class="number">74</span>   <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"><span class="number">75</span> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3）代码分析"><a href="#3）代码分析" class="headerlink" title="3）代码分析"></a>3）代码分析</h2><p>通过第37行代码GetDlgItemTextA，我们知道了<strong>String是我们输入的flag</strong>。</p>
+<p>通过第38行代码我们知道<strong>flag的长度应该是8</strong></p>
+<p>第51行函数sub_4010F0在对v9<del>v19进行某种操作，进入sub_4010F0函数，将函数转换为C语言代码，再将v9</del>v19代入</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">sub_4010F0</span><span class="params">(<span class="keyword">char</span>*a1, <span class="keyword">int</span> a2, <span class="keyword">int</span> a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// esi</span></span><br><span class="line">  <span class="keyword">int</span> v5; <span class="comment">// ecx</span></span><br><span class="line">  <span class="keyword">int</span> v6; <span class="comment">// edx</span></span><br><span class="line"></span><br><span class="line">  result = a3;</span><br><span class="line">  <span class="keyword">for</span> ( i = a2; i &lt;= a3; a2 = i )</span><br><span class="line">  &#123;</span><br><span class="line">    v5 = i;</span><br><span class="line">    v6 = a1[i];</span><br><span class="line">    <span class="keyword">if</span> ( a2 &lt; result &amp;&amp; i &lt; result )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">do</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">if</span> ( v6 &gt; a1[result] )</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          ++i;</span><br><span class="line">          a1[v5]= a1[result];</span><br><span class="line">          <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">while</span> ( a1[i] &lt;= v6 )</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="keyword">if</span> ( ++i &gt;= result )</span><br><span class="line">              <span class="keyword">goto</span> LABEL_13;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          v5 = i;</span><br><span class="line">          a1[result] = a1[i];</span><br><span class="line">        &#125;</span><br><span class="line">        --result;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span> ( i &lt; result );</span><br><span class="line">    &#125;</span><br><span class="line">   LABEL_13:</span><br><span class="line">    a1[result]= v6;</span><br><span class="line">    sub_4010F0(a1, a2, i - <span class="number">1</span>);</span><br><span class="line">    result = a3;</span><br><span class="line">    ++i;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s[]=<span class="string">"ZJSECaNH3ng"</span>; <span class="comment">//(v9~v19)</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s"</span>,s\n);</span><br><span class="line">    sub_4010F0(s,<span class="number">0</span>,<span class="number">10</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s"</span>,s);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：整数数组每个元素的地址相差4</strong></p>
+<p>运行结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ZJSECaNH3ng</span><br><span class="line">3CEHJNSZagn</span><br></pre></td></tr></table></figure>
+
+
+
+<p>分析第52行代码~58行代码。我们转到汇编代码处</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">.text:0040123D                 mov     [ebp+var_20030], &#39;Z&#39;</span><br><span class="line">.text:00401247                 mov     [ebp+var_2002C], &#39;J&#39;</span><br><span class="line">.text:00401251                 mov     [ebp+var_20028], &#39;S&#39;</span><br><span class="line">.text:0040125B                 mov     [ebp+var_20024], &#39;E&#39;</span><br><span class="line">.text:00401265                 mov     [ebp+var_20020], &#39;C&#39;</span><br><span class="line">.text:0040126F                 mov     [ebp+var_2001C], &#39;a&#39;</span><br><span class="line">.text:00401279                 mov     [ebp+var_20018], &#39;N&#39;</span><br><span class="line">.text:00401283                 mov     [ebp+var_20014], &#39;H&#39;</span><br><span class="line">.text:0040128D                 mov     [ebp+var_20010], &#39;3&#39;</span><br><span class="line">.text:00401297                 mov     [ebp+var_2000C], &#39;n&#39;</span><br><span class="line">.text:004012A1                 mov     [ebp+var_20008], &#39;g&#39;</span><br><span class="line">.text:004012AB                 call    sub_4010F0</span><br><span class="line">.text:004012B0                 push    0FFFFh          ; size_t</span><br><span class="line">.text:004012B5                 lea     edx, [ebp+var_10004]</span><br><span class="line">.text:004012BB                 push    0               ; int</span><br><span class="line">.text:004012BD                 push    edx             ; void *</span><br><span class="line">.text:004012BE                 call    _memset</span><br><span class="line">**.text:004012C3                 mov     al, [ebp+var_1FFFF]</span><br><span class="line">**.text:004012C9                 mov     dl, [ebp+var_1FFFD]**</span><br><span class="line">**.text:004012CF                 mov     cl, [ebp+var_1FFFE]****</span><br><span class="line">.text:004012D5                 mov     [ebp+var_10004], al</span><br><span class="line">.text:004012DB                 lea     eax, [ebp+var_10004]</span><br><span class="line">.text:004012E1                 mov     [ebp+var_10002], dl</span><br><span class="line">.text:004012E7                 add     esp, 18h</span><br><span class="line">.text:004012EA                 mov     [ebp+var_10003], cl</span><br><span class="line">.text:004012F0                 lea     edx, [eax+1]</span><br><span class="line">.text:004012F3</span><br><span class="line">.text:004012F3 loc_4012F3:                             ; CODE XREF: DialogFunc+158↓j</span><br><span class="line">.text:004012F3                 mov     cl, [eax]</span><br><span class="line">.text:004012F5                 inc     eax</span><br><span class="line">.text:004012F6                 test    cl, cl</span><br><span class="line">.text:004012F8                 jnz     short loc_4012F3</span><br><span class="line">.text:004012FA                 sub     eax, edx</span><br><span class="line">.text:004012FC                 push    eax</span><br><span class="line">.text:004012FD                 lea     eax, [ebp+var_10004]</span><br><span class="line">.text:00401303                 push    eax</span><br><span class="line">.text:00401304                 call    sub_401000</span><br><span class="line">.text:00401309                 push    0FFFFh          ; size_t</span><br><span class="line">.text:0040130E                 lea     ecx, [ebp+var_10004]</span><br><span class="line">.text:00401314                 push    0               ; int</span><br><span class="line">.text:00401316                 push    ecx             ; void *</span><br><span class="line">.text:00401317                 mov     esi, eax</span><br><span class="line">.text:00401319                 call    _memset</span><br><span class="line">**.text:0040131E                 mov     al, [ebp+var_20001]**</span><br><span class="line">**.text:00401324                 mov     dl, [ebp+var_20002]**</span><br><span class="line">**.text:0040132A                 mov     cl, [ebp+var_20000]**</span><br><span class="line">.text:00401330                 mov     [ebp+var_10003], al</span><br><span class="line">.text:00401336                 lea     eax, [ebp+var_10004]</span><br><span class="line">.text:0040133C                 mov     [ebp+var_10004], dl</span><br><span class="line">.text:00401342                 add     esp, 14h</span><br><span class="line">.text:00401345                 mov     [ebp+var_10002], cl</span><br><span class="line">.text:0040134B                 lea     edx, [eax+1]</span><br><span class="line">.text:0040134E                 mov     edi, edi</span><br></pre></td></tr></table></figure>
+
+<p>并且可以从我打*号的代码看出，v6调用的是flag的678位，v7调用的是flag的345位</p>
+<p>而对字符串v6,v7加密的函数<code>sub_401000</code>函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">_BYTE *__cdecl <span class="title">sub_401000</span><span class="params">(<span class="keyword">int</span> a1, <span class="keyword">int</span> a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// esi</span></span><br><span class="line">  <span class="keyword">size_t</span> v4; <span class="comment">// ebx</span></span><br><span class="line">  _BYTE *v5; <span class="comment">// eax</span></span><br><span class="line">  _BYTE *v6; <span class="comment">// edi</span></span><br><span class="line">  <span class="keyword">int</span> v7; <span class="comment">// eax</span></span><br><span class="line">  _BYTE *v8; <span class="comment">// ebx</span></span><br><span class="line">  <span class="keyword">int</span> v9; <span class="comment">// edi</span></span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> v10; <span class="comment">// edx</span></span><br><span class="line">  <span class="keyword">int</span> v11; <span class="comment">// edi</span></span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> v12; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> v13; <span class="comment">// esi</span></span><br><span class="line">  _BYTE *result; <span class="comment">// eax</span></span><br><span class="line">  _BYTE *v15; <span class="comment">// [esp+Ch] [ebp-10h]</span></span><br><span class="line">  _BYTE *v16; <span class="comment">// [esp+10h] [ebp-Ch]</span></span><br><span class="line">  <span class="keyword">int</span> v17; <span class="comment">// [esp+14h] [ebp-8h]</span></span><br><span class="line">  <span class="keyword">int</span> v18; <span class="comment">// [esp+18h] [ebp-4h]</span></span><br><span class="line"></span><br><span class="line">  v2 = a2 / <span class="number">3</span>;</span><br><span class="line">  v3 = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span> ( a2 % <span class="number">3</span> &gt; <span class="number">0</span> )</span><br><span class="line">    ++v2;</span><br><span class="line">  v4 = <span class="number">4</span> * v2 + <span class="number">1</span>;</span><br><span class="line">  v5 = <span class="built_in">malloc</span>(v4);</span><br><span class="line">  v6 = v5;</span><br><span class="line">  v15 = v5;</span><br><span class="line">  <span class="keyword">if</span> ( !v5 )</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="built_in">memset</span>(v5, <span class="number">0</span>, v4);</span><br><span class="line">  v7 = a2;</span><br><span class="line">  v8 = v6;</span><br><span class="line">  v16 = v6;</span><br><span class="line">  <span class="keyword">if</span> ( a2 &gt; <span class="number">0</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      v9 = <span class="number">0</span>;</span><br><span class="line">      v10 = <span class="number">0</span>;</span><br><span class="line">      v18 = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">do</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">if</span> ( v3 &gt;= v7 )</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        ++v10;</span><br><span class="line">        v9 = *(<span class="keyword">unsigned</span> __int8 *)(v3++ + a1) | (v9 &lt;&lt; <span class="number">8</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span> ( v10 &lt; <span class="number">3</span> );</span><br><span class="line">      v11 = v9 &lt;&lt; <span class="number">8</span> * (<span class="number">3</span> - v10);</span><br><span class="line">      v12 = <span class="number">0</span>;</span><br><span class="line">      v17 = v3;</span><br><span class="line">      v13 = <span class="number">18</span>;</span><br><span class="line">      <span class="keyword">do</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">if</span> ( v10 &gt;= v12 )</span><br><span class="line">        &#123;</span><br><span class="line">          *((_BYTE *)&amp;v18 + v12) = (v11 &gt;&gt; v13) &amp; <span class="number">0x3F</span>;</span><br><span class="line">          v8 = v16;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">          *((_BYTE *)&amp;v18 + v12) = <span class="number">64</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        *v8++ = byte_407830[*((<span class="keyword">char</span> *)&amp;v18 + v12)];</span><br><span class="line">        v13 -= <span class="number">6</span>;</span><br><span class="line">        ++v12;</span><br><span class="line">        v16 = v8;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span> ( v13 &gt; <span class="number">-6</span> );</span><br><span class="line">      v3 = v17;</span><br><span class="line">      <span class="keyword">if</span> ( v17 &gt;= a2 )</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      v7 = a2;</span><br><span class="line">    &#125;</span><br><span class="line">    v6 = v15;</span><br><span class="line">  &#125;</span><br><span class="line">  result = v6;</span><br><span class="line">  *v8 = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中发现了一个数据<code>byte_407830</code>，双击进入</p>
+<p><img src="/2020/07/13/BUUCTF-%E5%88%AE%E5%BC%80%E6%9C%89%E5%A5%96/base64.png" alt="base64"></p>
+<p>看到这熟悉的字符，立刻联想到<strong>base64编码</strong></p>
+<p>最后是flag分析</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( <span class="keyword">String</span> == v9 + <span class="number">34</span>           <span class="comment">// sub_4010F0函数后的第一位等于51+34=85--&gt;'U'</span></span><br><span class="line">  &amp;&amp; v21 == v13                  <span class="comment">// 第2位，等于v13,即sub_4010F0函数返回值的第5位值--&gt;'J'</span></span><br><span class="line">  &amp;&amp; <span class="number">4</span> * v22 - <span class="number">141</span> == <span class="number">3</span> * v11</span><br><span class="line">  &amp;&amp; v23 / <span class="number">4</span> == <span class="number">2</span> * (v16 / <span class="number">9</span>)</span><br><span class="line">  &amp;&amp; !<span class="built_in">strcmp</span>(v6, <span class="string">"ak1w"</span>)         <span class="comment">// 第6,7,8行代码base64之后，需要等于"ak1w"</span></span><br><span class="line">  &amp;&amp; !<span class="built_in">strcmp</span>(                    <span class="comment">// 第3,4,5行代码，加密之后等于V1Ax</span></span><br><span class="line">        v7,</span><br><span class="line">        <span class="string">"V1Ax"</span>) )</span><br><span class="line">&#123;</span><br><span class="line">  MessageBoxA(hDlg, <span class="string">"U g3t 1T!"</span>, <span class="string">"@_@"</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将v6，v7解密之后得到WP1jMp，再结合第1,2位得到flag{UJWP1jMp}**</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Re/" rel="tag"># Re</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/09/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%883%EF%BC%89/" rel="prev" title="爬虫基础（3）">
+      <i class="fa fa-chevron-left"></i> 爬虫基础（3）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BUUCTF–刮开有奖"><span class="nav-number">1.</span> <span class="nav-text">BUUCTF–刮开有奖</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-准备"><span class="nav-number">1.1.</span> <span class="nav-text">1) 准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2）IDA打开"><span class="nav-number">1.2.</span> <span class="nav-text">2）IDA打开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3）代码分析"><span class="nav-number">1.3.</span> <span class="nav-text">3）代码分析</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

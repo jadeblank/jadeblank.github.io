@@ -20,24 +20,26 @@
     var CONFIG = {"hostname":"jadeblank.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Base64编码原理：它是用64个可打印字符表示二进制所有数据方法。由于2的6次方等于64，所以可以用每6个位元为一个单元，对应某个可打印字符。 我们知道三个字节有24个位元，就可以刚好对应于4个Base64单元，即3个字节需要用4个Base64的可打印字符来表示。 在Base64中的可打印字符包括字母A-Z、a-z、数字0-9 ，这样共有62个字符，此外两个可打印符号在不同的系统中一般有所不同。">
+  <meta name="description" content="[BJDCTF 2nd]8086 汇编Re打开IDA，这是一个由8086汇编写成的程序。 Start 函数中调用了sub_10030函数，进去查看">
 <meta property="og:type" content="article">
-<meta property="og:title" content="base64算法及其特征">
-<meta property="og:url" content="http://jadeblank.github.io/2020/07/06/base64/index.html">
+<meta property="og:title" content="[BJDCTF2nd]8086汇编RE">
+<meta property="og:url" content="http://jadeblank.github.io/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/index.html">
 <meta property="og:site_name" content="Jade_Blank">
-<meta property="og:description" content="Base64编码原理：它是用64个可打印字符表示二进制所有数据方法。由于2的6次方等于64，所以可以用每6个位元为一个单元，对应某个可打印字符。 我们知道三个字节有24个位元，就可以刚好对应于4个Base64单元，即3个字节需要用4个Base64的可打印字符来表示。 在Base64中的可打印字符包括字母A-Z、a-z、数字0-9 ，这样共有62个字符，此外两个可打印符号在不同的系统中一般有所不同。">
+<meta property="og:description" content="[BJDCTF 2nd]8086 汇编Re打开IDA，这是一个由8086汇编写成的程序。 Start 函数中调用了sub_10030函数，进去查看">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://jadeblank.github.io/2020/07/06/base64/duiyingbiao.png">
-<meta property="og:image" content="http://jadeblank.github.io/2020/07/06/base64/tushi1.png">
-<meta property="og:image" content="http://jadeblank.github.io/2020/07/06/base64/tushi2.png">
-<meta property="article:published_time" content="2020-07-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-07-15T14:58:18.746Z">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/1.png">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/2.png">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/3.png">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/4.png">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/5.png">
+<meta property="article:published_time" content="2020-07-15T16:06:00.000Z">
+<meta property="article:modified_time" content="2020-07-15T16:08:44.672Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="加密与解密">
+<meta property="article:tag" content="Re">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://jadeblank.github.io/2020/07/06/base64/duiyingbiao.png">
+<meta name="twitter:image" content="http://jadeblank.github.io/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/1.png">
 
-<link rel="canonical" href="http://jadeblank.github.io/2020/07/06/base64/">
+<link rel="canonical" href="http://jadeblank.github.io/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/">
 
 
 <script id="page-configurations">
@@ -50,7 +52,7 @@
   };
 </script>
 
-  <title>base64算法及其特征 | Jade_Blank</title>
+  <title>[BJDCTF2nd]8086汇编RE | Jade_Blank</title>
   
 
 
@@ -170,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jadeblank.github.io/2020/07/06/base64/">
+    <link itemprop="mainEntityOfPage" href="http://jadeblank.github.io/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -183,7 +185,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          base64算法及其特征
+          [BJDCTF2nd]8086汇编RE
         </h1>
 
         <div class="post-meta">
@@ -192,16 +194,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-07-06 00:00:00" itemprop="dateCreated datePublished" datetime="2020-07-06T00:00:00+08:00">2020-07-06</time>
+              <time title="Created: 2020-07-16 00:06:00 / Modified: 00:08:44" itemprop="dateCreated datePublished" datetime="2020-07-16T00:06:00+08:00">2020-07-16</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-15 22:58:18" itemprop="dateModified" datetime="2020-07-15T22:58:18+08:00">2020-07-15</time>
-              </span>
 
           
 
@@ -214,22 +210,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Base64编码原理："><a href="#Base64编码原理：" class="headerlink" title="Base64编码原理："></a>Base64编码原理：</h2><p>它是用64个可打印字符表示二进制所有数据方法。由于2的6次方等于64，所以可以用每6个位元为一个单元，对应某个可打印字符。</p>
-<p>我们知道三个字节有24个位元，就可以刚好对应于4个Base64单元，即3<strong>个字节需要用4个Base64的可打印字符</strong>来表示。</p>
-<p>在Base64中的可打印字符包括字母A-Z、a-z、数字0-9 ，这样共有62个字符，此外两个可打印符号在不同的系统中一般有所不同。但是，我们经常所说的Base64另外2个字符是：“+/”。</p>
-<p>这64个字符，所对应表如下。 </p>
-<p><img src="/2020/07/06/base64/duiyingbiao.png" alt="对应表"> </p>
-<p>转换的时候，将三个byte的数据，先后放入一个24bit的缓冲区中，先来的byte占高位。数据不足3byte的话，于缓冲区中剩下的bit用0补足。</p>
-<p>然后，每次取出6个bit，按照其值选择ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/中的字符作为编码后的输出。</p>
-<p>不断进行，直到全部输入数据转换完成。所以加密后的数据量是原来的4/3</p>
-<p>这里有一个问题，就是每次转换的字节数不一定就是24的整数倍，会出现有多余不足六位的情况，在base64中处理的方法是加零凑够六位，但是这样一来在解码的时候就会出现多余的位  </p>
-<p>这该怎么办呢？ 不用担心，base64想到了一个很好的解决办法。这个办法就是在 base64凑零的同时，还要满足凑出来的位数是8的倍数，不然就加一个或者两个特殊的六位  =  符号。</p>
-<p>为什么是一个或者两个=符号呢？ 因为多个8位转为6位 只会出现 剩余 2位，4位的情况，剩余2位 只需要一个 表示六位的 = 便可变为8的整数；而剩余4位 需要两个表示6位的 = 便可以变成16 是8的整数。然后在解密的时候不解析 =即可。</p>
-<p>之所以位的总数需要凑成8的倍数，是因为base64主要用于加密后的数据传送，而在传送机制中都认为传送的最小单位是按照字节算的，所以不能出现不是位总数不是8的倍数的情况，在接收到数据后，按顺序将6位的base64直接按照顺序解密成字节就完成解密了。</p>
-<p>这是恰好三个字节转为base64</p>
-<p><img src="/2020/07/06/base64/tushi1.png" alt="图示1"></p>
-<p>这是字节的位总数不是6的倍数的情况，当剩下4位时，我们需要补2个 =  凑齐8的倍数；当剩下的是2位时，我们需要补齐1个 = 凑齐8的倍数。</p>
-<p><img src="/2020/07/06/base64/tushi2.png" alt="图示2"></p>
+        <h1 id="BJDCTF-2nd-8086-汇编Re"><a href="#BJDCTF-2nd-8086-汇编Re" class="headerlink" title="[BJDCTF 2nd]8086 汇编Re"></a>[BJDCTF 2nd]8086 汇编Re</h1><p>打开IDA，这是一个由8086汇编写成的程序。</p>
+<p>Start 函数中调用了sub_10030函数，进去查看</p>
+<p><img src="/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/1.png" alt="PE"></p>
+<a id="more"></a>
+
+<p>发现sub_10030函数是个死循环，不断跳转到自身。</p>
+<p><img src="/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/2.png" alt="PE"></p>
+<p>直接查看汇编，这是一个由8086汇编写成的程序。第一段数据段是将这串字符串写入物理地址，并取名aUDuTZWjQGjzZWz。</p>
+<p><img src="/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/3.png" alt="PE"></p>
+<p>接下来则是代码段，就是刚才的死循环段。但是后面还有一串数据，估计就是真正的代码。<strong>选中，按C，选force</strong>（多选中一点），强制转换成汇编。</p>
+<p><img src="/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/4.png" alt="PE"></p>
+<p><img src="/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/5.png" alt="PE"></p>
+<p>这里是循环0x22次。字符串和0x1F异或，异或的结果就是flag了。写脚本。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">']U[du~|t@&#123;z@wj.&#125;.~q@gjz&#123;z@wzqW~/b'</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">    flag += chr(ord(i)^<span class="number">0x1F</span>)</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>BJD{jack_de_hu1b1an_xuede_henHa0}</p>
 
     </div>
 
@@ -239,7 +235,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86/" rel="tag"># 加密与解密</a>
+              <a href="/tags/Re/" rel="tag"># Re</a>
           </div>
 
         
@@ -247,11 +243,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%881%EF%BC%89/" rel="next" title="爬虫基础（1）">
-      爬虫基础（1） <i class="fa fa-chevron-right"></i>
+    <a href="/2020/07/15/%E5%87%AF%E6%92%92%E5%8A%A0%E5%AF%86/" rel="prev" title="凯撒加密">
+      <i class="fa fa-chevron-left"></i> 凯撒加密
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -310,7 +306,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Base64编码原理："><span class="nav-number">1.</span> <span class="nav-text">Base64编码原理：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BJDCTF-2nd-8086-汇编Re"><span class="nav-number">1.</span> <span class="nav-text">[BJDCTF 2nd]8086 汇编Re</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

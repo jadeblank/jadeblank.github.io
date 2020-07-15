@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://jadeblank.github.io/2020/07/13/BUUCTF-%E5%88%AE%E5%BC%80%E6%9C%89%E5%A5%96/winmain.png">
 <meta property="og:image" content="http://jadeblank.github.io/2020/07/13/BUUCTF-%E5%88%AE%E5%BC%80%E6%9C%89%E5%A5%96/base64.png">
 <meta property="article:published_time" content="2020-07-13T14:00:12.000Z">
-<meta property="article:modified_time" content="2020-07-13T15:12:17.281Z">
+<meta property="article:modified_time" content="2020-07-15T14:58:36.575Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Re">
 <meta name="twitter:card" content="summary">
@@ -192,10 +192,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-07-13 22:00:12 / Modified: 23:12:17" itemprop="dateCreated datePublished" datetime="2020-07-13T22:00:12+08:00">2020-07-13</time>
+              <time title="Created: 2020-07-13 22:00:12" itemprop="dateCreated datePublished" datetime="2020-07-13T22:00:12+08:00">2020-07-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-15 22:58:36" itemprop="dateModified" datetime="2020-07-15T22:58:36+08:00">2020-07-15</time>
+              </span>
 
           
 
@@ -223,7 +229,7 @@
 
 <h2 id="3）代码分析"><a href="#3）代码分析" class="headerlink" title="3）代码分析"></a>3）代码分析</h2><p>通过第37行代码GetDlgItemTextA，我们知道了<strong>String是我们输入的flag</strong>。</p>
 <p>通过第38行代码我们知道<strong>flag的长度应该是8</strong></p>
-<p>第51行函数sub_4010F0在对v9<del>v19进行某种操作，进入sub_4010F0函数，将函数转换为C语言代码，再将v9</del>v19代入</p>
+<p>第51行函数sub_4010F0在对v9-v19进行某种操作，进入sub_4010F0函数，将函数转换为C语言代码，再将v9-v19代入</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">sub_4010F0</span><span class="params">(<span class="keyword">char</span>*a1, <span class="keyword">int</span> a2, <span class="keyword">int</span> a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// esi</span></span><br><span class="line">  <span class="keyword">int</span> v5; <span class="comment">// ecx</span></span><br><span class="line">  <span class="keyword">int</span> v6; <span class="comment">// edx</span></span><br><span class="line"></span><br><span class="line">  result = a3;</span><br><span class="line">  <span class="keyword">for</span> ( i = a2; i &lt;= a3; a2 = i )</span><br><span class="line">  &#123;</span><br><span class="line">    v5 = i;</span><br><span class="line">    v6 = a1[i];</span><br><span class="line">    <span class="keyword">if</span> ( a2 &lt; result &amp;&amp; i &lt; result )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">do</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">if</span> ( v6 &gt; a1[result] )</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          ++i;</span><br><span class="line">          a1[v5]= a1[result];</span><br><span class="line">          <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">while</span> ( a1[i] &lt;= v6 )</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="keyword">if</span> ( ++i &gt;= result )</span><br><span class="line">              <span class="keyword">goto</span> LABEL_13;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          v5 = i;</span><br><span class="line">          a1[result] = a1[i];</span><br><span class="line">        &#125;</span><br><span class="line">        --result;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span> ( i &lt; result );</span><br><span class="line">    &#125;</span><br><span class="line">   LABEL_13:</span><br><span class="line">    a1[result]= v6;</span><br><span class="line">    sub_4010F0(a1, a2, i - <span class="number">1</span>);</span><br><span class="line">    result = a3;</span><br><span class="line">    ++i;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s[]=<span class="string">"ZJSECaNH3ng"</span>; <span class="comment">//(v9~v19)</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s"</span>,s\n);</span><br><span class="line">    sub_4010F0(s,<span class="number">0</span>,<span class="number">10</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s"</span>,s);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>注意：整数数组每个元素的地址相差4</strong></p>
@@ -267,7 +273,10 @@
     <a href="/2020/07/09/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%883%EF%BC%89/" rel="prev" title="爬虫基础（3）">
       <i class="fa fa-chevron-left"></i> 爬虫基础（3）
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/15/%E5%87%AF%E6%92%92%E5%8A%A0%E5%AF%86/" rel="next" title="凯撒加密">
+      凯撒加密 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -340,14 +349,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

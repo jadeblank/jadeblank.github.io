@@ -20,15 +20,27 @@
     var CONFIG = {"hostname":"jadeblank.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Blog_or_Block">
-<meta property="og:url" content="http://jadeblank.github.io/archives/2020/index.html">
+  <meta name="description" content="[GWCTF 2019]xxor下载后是个elf文件，直接扔进IDA分析： Main的代码也比较简单：  根据提示，我们需要输入六个数据，在经过两处处理之后得到一段数据，最后将其转换为十六进制在转成字符串。 第一部分处理：  这里是将输入的六个数据第一次处理，三次循环，每次取两个数据出来存到dword_601078和dword_60107C中。 sub_400686对每次取出的第一个数据进行再处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xxor">
+<meta property="og:url" content="http://jadeblank.github.io/2020/07/25/xxor/index.html">
 <meta property="og:site_name" content="Blog_or_Block">
+<meta property="og:description" content="[GWCTF 2019]xxor下载后是个elf文件，直接扔进IDA分析： Main的代码也比较简单：  根据提示，我们需要输入六个数据，在经过两处处理之后得到一段数据，最后将其转换为十六进制在转成字符串。 第一部分处理：  这里是将输入的六个数据第一次处理，三次循环，每次取两个数据出来存到dword_601078和dword_60107C中。 sub_400686对每次取出的第一个数据进行再处理">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/25/xxor/main.png">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/25/xxor/1.png">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/25/xxor/sub.png">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/25/xxor/2.png">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/25/xxor/sub2.png">
+<meta property="og:image" content="http://jadeblank.github.io/2020/07/25/xxor/result.png">
+<meta property="article:published_time" content="2020-07-25T13:38:52.000Z">
+<meta property="article:modified_time" content="2020-07-25T13:47:49.119Z">
 <meta property="article:author" content="Jade_Blank">
+<meta property="article:tag" content="Re">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jadeblank.github.io/2020/07/25/xxor/main.png">
 
-<link rel="canonical" href="http://jadeblank.github.io/archives/2020/">
+<link rel="canonical" href="http://jadeblank.github.io/2020/07/25/xxor/">
 
 
 <script id="page-configurations">
@@ -36,12 +48,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Archive | Blog_or_Block</title>
+  <title>xxor | Blog_or_Block</title>
   
 
 
@@ -154,210 +166,99 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">Um..! 9 posts in total. Keep on posting.</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jadeblank.github.io/2020/07/25/xxor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jade_Blank">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog_or_Block">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          xxor
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-07-25 21:38:52 / Modified: 21:47:49" itemprop="dateCreated datePublished" datetime="2020-07-25T21:38:52+08:00">2020-07-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-25T21:38:52+08:00"
-              content="2020-07-25">
-          07-25
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/25/xxor/" itemprop="url">
-            <span itemprop="name">xxor</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-22T00:23:47+08:00"
-              content="2020-07-22">
-          07-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/22/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-rome/" itemprop="url">
-            <span itemprop="name">[ACTF新生赛2020]rome</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-16T00:06:00+08:00"
-              content="2020-07-16">
-          07-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/16/BJDCTF2nd-8086%E6%B1%87%E7%BC%96RE/" itemprop="url">
-            <span itemprop="name">[BJDCTF2nd]8086汇编RE</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-15T21:59:47+08:00"
-              content="2020-07-15">
-          07-15
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/15/%E5%87%AF%E6%92%92%E5%8A%A0%E5%AF%86/" itemprop="url">
-            <span itemprop="name">凯撒加密</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-13T22:00:12+08:00"
-              content="2020-07-13">
-          07-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/13/BUUCTF-%E5%88%AE%E5%BC%80%E6%9C%89%E5%A5%96/" itemprop="url">
-            <span itemprop="name">BUUCTF--刮开有奖</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-09T10:30:47+08:00"
-              content="2020-07-09">
-          07-09
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/09/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%883%EF%BC%89/" itemprop="url">
-            <span itemprop="name">爬虫基础（3）</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-08T16:55:03+08:00"
-              content="2020-07-08">
-          07-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%882%EF%BC%89/" itemprop="url">
-            <span itemprop="name">爬虫基础（2）</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-08T10:42:52+08:00"
-              content="2020-07-08">
-          07-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/08/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80%EF%BC%881%EF%BC%89/" itemprop="url">
-            <span itemprop="name">爬虫基础（1）</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-06T00:00:00+08:00"
-              content="2020-07-06">
-          07-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/06/base64/" itemprop="url">
-            <span itemprop="name">base64算法及其特征</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+        <h1 id="GWCTF-2019-xxor"><a href="#GWCTF-2019-xxor" class="headerlink" title="[GWCTF 2019]xxor"></a>[GWCTF 2019]xxor</h1><p>下载后是个elf文件，直接扔进IDA分析：</p>
+<p>Main的代码也比较简单：</p>
+<p><img src="/2020/07/25/xxor/main.png" alt="对应表"></p>
+<p>根据提示，我们需要输入六个数据，在经过两处处理之后得到一段数据，最后将其转换为十六进制在转成字符串。</p>
+<p><strong>第一部分处理</strong>：</p>
+<p><img src="/2020/07/25/xxor/1.png" alt="对应表"></p>
+<p>这里是将输入的六个数据第一次处理，三次循环，<strong>每次取两个数据</strong>出来存到dword_601078和dword_60107C中。</p>
+<p>sub_400686对每次取出的第一个数据进行再处理，byte_601060里面存放的是四个数据：2，2，3，4。</p>
+<p>我们进去sub_400686函数</p>
+<p><img src="/2020/07/25/xxor/sub.png" alt="sub">内部：</p>
+<p>需要注意的地方是，a3取到了a1[0]，a4取到了a1[1]，其实就是在外面循环中每次取入的两个数据。</p>
+<p>在函数内部经过<strong>六十四次运算</strong>之后，将得到的结果存入a1[0]和a1[1]，返回外面的循环。</p>
+<p>在之后便是把这两个处理过的数据放进v11数组中。这个地方的第二个数据其实已经发生了变化，地址存放的数据已经改变了。</p>
+<p><strong>第二个处理:</strong></p>
+<p><img src="/2020/07/25/xxor/2.png" alt="sub"></p>
+<p>这里需要进入sub_400770内部查看：</p>
+<p><img src="/2020/07/25/xxor/sub2.png" alt="sub"></p>
+<p>用计算器算一下这六个数，这六个数就是上面一层数据处理之后应该得到的结果。</p>
+<p>那么需要我们逆向的就是通过这六个数反推我们应该输入的六个数，结果为 flag{re_is_great!}</p>
+<p><img src="/2020/07/25/xxor/result.png" alt="sub"></p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Re/" rel="tag"># Re</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/22/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-rome/" rel="prev" title="[ACTF新生赛2020]rome">
+      <i class="fa fa-chevron-left"></i> [ACTF新生赛2020]rome
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
@@ -410,6 +311,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GWCTF-2019-xxor"><span class="nav-number">1.</span> <span class="nav-text">[GWCTF 2019]xxor</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

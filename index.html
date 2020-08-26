@@ -831,7 +831,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-15 22:58:18" itemprop="dateModified" datetime="2020-07-15T22:58:18+08:00">2020-07-15</time>
+                <time title="Modified: 2020-08-26 22:56:10" itemprop="dateModified" datetime="2020-08-26T22:56:10+08:00">2020-08-26</time>
               </span>
 
           
@@ -861,6 +861,17 @@
 <p><img src="/2020/07/06/base64/tushi1.png" alt="图示1"></p>
 <p>这是字节的位总数不是6的倍数的情况，当剩下4位时，我们需要补2个 =  凑齐8的倍数；当剩下的是2位时，我们需要补齐1个 = 凑齐8的倍数。</p>
 <p><img src="/2020/07/06/base64/tushi2.png" alt="图示2"></p>
+<h2 id="自定义-Base64-编码表"><a href="#自定义-Base64-编码表" class="headerlink" title="自定义 Base64 编码表"></a>自定义 Base64 编码表</h2><p>今天做题时做了一个变换码表的base64解密题目<br>一般在线解密的码表都是：“ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/”<br>可我做的题目码表却是：“ZYXABCDEFGHIJKLMNOPQRSTUVWzyxabcdefghijklmnopqrstuvw0123456789+/”<br>所以一般的在线网站就无法解决我们的问题<br>所以我们可以运用 Python3 中的 <strong>maketrans</strong>() 方法，来完成对变异base64的加解密<br>脚本代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">str1 = <span class="string">"zMXHz3TIgnxLxJhFAdtZn2fFk3lYCrtPC2l9"</span>.swapcase()</span><br><span class="line"></span><br><span class="line">string1 = <span class="string">"ABCDEFQRSTUVWXYPGHIJKLMNOZabcdefghijklmnopqrstuvwxyz0123456789+/"</span></span><br><span class="line">string2 = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (base64.b64decode(str1.translate(str.maketrans(string1,string2))))</span><br></pre></td></tr></table></figure>
+
+<p>str1是要解密的代码</p>
+<p>string1是改过之后的base64表</p>
+<ul>
+<li><p>注：</p>
+<p>maketrans() 方法用于创建字符映射的转换表，对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也是字符串表示转换的目标。</p>
+<p>两个字符串的长度必须相同，为一一对应的关系。</p>
+</li>
+</ul>
 
       
     </div>

@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://jadeblank.github.io/2020/07/15/%E5%87%AF%E6%92%92%E5%8A%A0%E5%AF%86/%E5%9B%BE%E7%89%87.png">
 <meta property="article:published_time" content="2020-07-15T13:59:47.000Z">
-<meta property="article:modified_time" content="2020-07-15T14:59:00.355Z">
+<meta property="article:modified_time" content="2020-08-27T16:17:14.814Z">
 <meta property="article:author" content="Jade_Blank">
 <meta property="article:tag" content="加密与解密">
 <meta name="twitter:card" content="summary">
@@ -190,10 +190,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-07-15 21:59:47 / Modified: 22:59:00" itemprop="dateCreated datePublished" datetime="2020-07-15T21:59:47+08:00">2020-07-15</time>
+              <time title="Created: 2020-07-15 21:59:47" itemprop="dateCreated datePublished" datetime="2020-07-15T21:59:47+08:00">2020-07-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-28 00:17:14" itemprop="dateModified" datetime="2020-08-28T00:17:14+08:00">2020-08-28</time>
+              </span>
 
           
 
@@ -216,13 +222,14 @@
 <p>明文：flag{i_LOVE_Reverse}</p>
 <p>key=11</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">model = <span class="string">"abcdefghijklmnopqrstuvwxyz"</span></span><br><span class="line">model2 = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZ'</span></span><br><span class="line"></span><br><span class="line">str1 = <span class="string">"flag&#123;i_LOVE_Reverse&#125;"</span></span><br><span class="line">key = <span class="number">11</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> str1:</span><br><span class="line">    <span class="keyword">if</span> s.islower():</span><br><span class="line">        n = model.find(s)</span><br><span class="line">        s = model[n-key]</span><br><span class="line">    <span class="keyword">elif</span> s.isupper():</span><br><span class="line">        n = model2.find(s)</span><br><span class="line">        s = model2[n - key]</span><br><span class="line">    print(s, end=<span class="string">''</span>)</span><br><span class="line">print(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">model = <span class="string">"abcdefghijklmnopqrstuvwxyz"</span></span><br><span class="line">model2 = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZ'</span></span><br><span class="line"></span><br><span class="line">str1 = <span class="string">"flag&#123;i_LOVE_Reverse&#125;"</span></span><br><span class="line">key = <span class="number">11</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> str1:</span><br><span class="line">    <span class="keyword">if</span> s.islower():</span><br><span class="line">        n = model.find(s)</span><br><span class="line">        s = model[(n + key) % <span class="number">26</span>]</span><br><span class="line">    <span class="keyword">elif</span> s.isupper():</span><br><span class="line">        n = model2.find(s)</span><br><span class="line">        s = model2[(n + key) % <span class="number">26</span>]</span><br><span class="line">    print(s, end=<span class="string">''</span>)</span><br><span class="line">print(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
 
 <p>得到加密之后的字符串：</p>
 <blockquote>
 <p>qwlr{t_WZGP_Cpgpcdp}</p>
 </blockquote>
-<h2 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">model = <span class="string">"abcdefghijklmnopqrstuvwxyz"</span></span><br><span class="line">model2 = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZ'</span></span><br><span class="line"></span><br><span class="line">str1 = <span class="string">"qwlr&#123;t_WZGP_Cpgpcdp&#125;"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">27</span>):</span><br><span class="line">    print(<span class="string">"key=%d"</span>%key, end=<span class="string">'\n'</span>)</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> str1:</span><br><span class="line">        <span class="keyword">if</span> s.islower():</span><br><span class="line">            n = model.find(s)</span><br><span class="line">            s = model[n-key]</span><br><span class="line">        <span class="keyword">elif</span> s.isupper():</span><br><span class="line">            n = model2.find(s)</span><br><span class="line">            s = model2[n-key]</span><br><span class="line">        print(s, end=<span class="string">''</span>)</span><br><span class="line">    print(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="解密——穷举法"><a href="#解密——穷举法" class="headerlink" title="解密——穷举法"></a>解密——穷举法</h2><p>​    由于使用恺撒密码进行加密的语言一般都是字母文字系统，因此密码中可能是使用的偏移量也是有限的，例如使用26个字母的英语，它的偏移量最多就是25（偏移量26等同于偏移量0，即明文；偏移量超过26，等同于偏移量1-25）。因此可以通过穷举法，很轻易地进行破解。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">model = <span class="string">"abcdefghijklmnopqrstuvwxyz"</span></span><br><span class="line">model2 = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZ'</span></span><br><span class="line"></span><br><span class="line">str1 = <span class="string">"qwlr&#123;t_WZGP_Cpgpcdp&#125;"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">27</span>):</span><br><span class="line">    print(<span class="string">"key=%d"</span>%key, end=<span class="string">'\n'</span>)</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> str1:</span><br><span class="line">        <span class="keyword">if</span> s.islower():</span><br><span class="line">            n = model.find(s)</span><br><span class="line">            s = model[n-key]</span><br><span class="line">        <span class="keyword">elif</span> s.isupper():</span><br><span class="line">            n = model2.find(s)</span><br><span class="line">            s = model2[n-key]</span><br><span class="line">        print(s, end=<span class="string">''</span>)</span><br><span class="line">    print(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
 
 
 
@@ -338,7 +345,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#凯撒加密"><span class="nav-number">1.</span> <span class="nav-text">凯撒加密</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#加密"><span class="nav-number">1.1.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解密"><span class="nav-number">1.2.</span> <span class="nav-text">解密</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#凯撒加密"><span class="nav-number">1.</span> <span class="nav-text">凯撒加密</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#加密"><span class="nav-number">1.1.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解密——穷举法"><span class="nav-number">1.2.</span> <span class="nav-text">解密——穷举法</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
